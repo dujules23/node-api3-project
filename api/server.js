@@ -13,6 +13,9 @@ const userRouter = require('./users/users-router')
 
 const { logger } = require("./middleware/middleware")
 
+// you need this for it to read the body, otherwise it cannot read json
+server.use(express.json())
+
 
 // User Router
 server.use("/api/users", userRouter)
