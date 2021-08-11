@@ -6,6 +6,26 @@ const server = express();
 
 // global middlewares and the user's router need to be connected here
 
+//global middleware
+const morgan = require("morgan")
+
+const userRouter = require('./users/users-router')
+
+const { logger } = require("./middleware/middleware")
+
+// you need this for it to read the body, otherwise it cannot read json
+server.use(express.json())
+
+
+// User Router
+server.use("/api/users", userRouter)
+
+
+// Use middleware
+server.use(morgan("dev"))
+server.use(logger)
+
+
 server.get('/', (req, res) => {
   res.send(`<h2>Let's write some middleware!</h2>`);
 });
